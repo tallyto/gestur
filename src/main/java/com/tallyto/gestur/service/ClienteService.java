@@ -32,6 +32,16 @@ public class ClienteService {
         clienteExistente.setTelefone(clienteAtualizado.getTelefone());
         clienteExistente.setRenda(clienteAtualizado.getRenda());
         clienteExistente.setProfissao(clienteAtualizado.getProfissao());
+        clienteExistente.setDataNascimento(clienteAtualizado.getDataNascimento());
+
+        clienteExistente.setCep(clienteAtualizado.getCep());
+        clienteExistente.setLogradouro(clienteAtualizado.getLogradouro());
+        clienteExistente.setComplemento(clienteAtualizado.getComplemento());
+        clienteExistente.setCidade(clienteAtualizado.getCidade());
+        clienteExistente.setBairro(clienteAtualizado.getBairro());
+        clienteExistente.setEstado(clienteAtualizado.getEstado());
+
+
 
         return clienteRepository.save(clienteExistente);
     }

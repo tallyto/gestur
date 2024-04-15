@@ -28,6 +28,13 @@ public class Cliente {
     @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
 
+    private String cep;
+    private String logradouro;
+    private String complemento;
+    private String bairro;
+    private String cidade;
+    private String estado;
+
     // Getters e Setters
     // Você pode gerar os getters e setters usando o seu IDE ou Lombok
 }
