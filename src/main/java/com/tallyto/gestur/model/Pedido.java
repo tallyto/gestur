@@ -20,19 +20,14 @@ public class Pedido {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
-    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ItemPedido> itens = new ArrayList<>();
 
+    @Column(name = "data_pedido")
     private LocalDate dataPedido;
     private String status;
 
-    public void adicionarItem(Produto produto, int quantidade) {
-        ItemPedido item = new ItemPedido(this, produto, quantidade);
-        itens.add(item);
-    }
 
-    public void removerItem(ItemPedido item) {
-        itens.remove(item);
-        item.setPedido(null);
-    }
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+    private List<ItemPedido> itens = new ArrayList<>();
+
+
 }

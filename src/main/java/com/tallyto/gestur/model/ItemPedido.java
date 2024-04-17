@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 
-@Entity
+@Entity(name = "item_pedido")
 @Getter
 @Setter
 public class ItemPedido {
@@ -27,12 +27,4 @@ public class ItemPedido {
 
     // Construtores, getters e setters
 
-    public ItemPedido() {
-    }
-
-    public ItemPedido(Pedido pedido, Produto produto, int quantidade) {
-        this.pedido = pedido;
-        this.produto = produto;
-        this.quantidade = quantidade;
-    }
 }
