@@ -2,13 +2,14 @@ package com.tallyto.gestur.controller;
 
 import com.tallyto.gestur.model.Produto;
 import com.tallyto.gestur.service.ProdutoService;
+import com.tallyto.gestur.util.GesturUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/api/produto")
+@RequestMapping("/api/produtos")
 @RestController
 public class ProdutoController {
 
@@ -38,8 +39,13 @@ public class ProdutoController {
             return null;
         }
 
-        BeanUtils.copyProperties(produto, produtoAtual, "id");
+        BeanUtils.copyProperties(produto, produtoAtual, GesturUtils.getNullPropertyNames(produto));
 
         return produtoService.atualizarProduto(produtoAtual);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deletar(@PathVariable Long id) {
+        produtoService.deletarProduto(id);
     }
 }

@@ -1,18 +1,19 @@
 CREATE TABLE cliente
 (
     id              SERIAL PRIMARY KEY,
-    nome            VARCHAR(255),
+    nome            VARCHAR(100),
     cpf             VARCHAR(14),
     rg              VARCHAR(20),
-    email           VARCHAR(255),
+    email           VARCHAR(100),
     telefone        VARCHAR(20),
     cep             VARCHAR(9),
-    logradouro      VARCHAR(255),
-    complemento     VARCHAR(255),
+    rua             VARCHAR(100),
+    numero          VARCHAR(100),
+    complemento     VARCHAR(100),
     bairro          VARCHAR(100),
     cidade          VARCHAR(100),
     estado          VARCHAR(2),
     renda           DECIMAL(10, 2),
-    profissao       VARCHAR(255),
+    profissao       VARCHAR(50),
     data_nascimento date
 );

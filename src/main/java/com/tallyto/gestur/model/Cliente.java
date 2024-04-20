@@ -1,6 +1,5 @@
 package com.tallyto.gestur.model;
 
-
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,16 +24,16 @@ public class Cliente {
     private String telefone;
     private BigDecimal renda;
     private String profissao;
+
     @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
 
     private String cep;
-    private String logradouro;
+    private String rua;
+    private String numero;
     private String complemento;
     private String bairro;
     private String cidade;
     private String estado;
 
-    // Getters e Setters
-    // Você pode gerar os getters e setters usando o seu IDE ou Lombok
 }
