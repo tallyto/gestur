@@ -6,18 +6,18 @@ import lombok.Getter;
 import lombok.Setter;
 
 
-@Entity(name = "item_pedido")
+@Entity(name = "item_venda")
 @Getter
 @Setter
-public class ItemPedido {
+public class ItemVenda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "pedido_id")
-    private Pedido pedido;
+    @JoinColumn(name = "venda_id")
+    private Venda venda;
 
     @ManyToOne
     @JoinColumn(name = "produto_id")

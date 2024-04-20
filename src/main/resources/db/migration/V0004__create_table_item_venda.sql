@@ -1,9 +1,9 @@
-CREATE TABLE item_pedido
+CREATE TABLE item_venda
 (
     id         SERIAL PRIMARY KEY,
-    pedido_id  BIGINT,
+    venda_id   BIGINT,
     produto_id BIGINT,
     quantidade INT,
-    FOREIGN KEY (pedido_id) REFERENCES pedido (id),
+    FOREIGN KEY (venda_id) REFERENCES venda (id),
     FOREIGN KEY (produto_id) REFERENCES produto (id)
 );
