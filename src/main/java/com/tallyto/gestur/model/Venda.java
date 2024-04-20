@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Pedido {
+public class Venda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,14 +20,16 @@ public class Pedido {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
+    @Column(name = "data_embarque")
+    private LocalDate dataEmbarque;
 
-    @Column(name = "data_pedido")
-    private LocalDate dataPedido;
+    @Column(name = "data_desembarque")
+    private LocalDate dataDesembarque;
+
     private String status;
 
-
-    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
-    private List<ItemPedido> itens = new ArrayList<>();
+    @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL)
+    private List<ItemVenda> itens = new ArrayList<>();
 
 
 }
