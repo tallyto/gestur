@@ -5,8 +5,11 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 
-@Entity(name = "item_venda")
+
+@Entity
+@Table(name = "item_venda")
 @Getter
 @Setter
 public class ItemVenda {
@@ -25,6 +28,15 @@ public class ItemVenda {
 
     private int quantidade;
 
-    // Construtores, getters e setters
+    @Column(name = "valor_total")
+    private BigDecimal valorTotal;
+
+    @Column(name = "valor_pago")
+    private BigDecimal valorPago;
+
+    @Column(name = "forma_pagamento")
+    private String formaPagamento;
+
+    private String status;
 
 }
