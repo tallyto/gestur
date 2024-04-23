@@ -37,6 +37,4 @@ public class ItemVenda {
     @Column(name = "forma_pagamento")
     private String formaPagamento;
 
-    private String status;
-
 }
