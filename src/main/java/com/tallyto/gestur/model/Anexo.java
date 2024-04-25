@@ -1,9 +1,13 @@
 package com.tallyto.gestur.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "anexo")
+@Getter
+@Setter
 public class Anexo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
