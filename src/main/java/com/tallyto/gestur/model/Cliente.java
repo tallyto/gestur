@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "cliente")
@@ -35,5 +37,17 @@ public class Cliente {
     private String bairro;
     private String cidade;
     private String estado;
+
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    private List<ClienteAnexo> anexos = new ArrayList<>();
+
+    public void adicionarAnexo(ClienteAnexo anexo) {
+        anexos.add(anexo);
+        anexo.setCliente(this);
+    }
+
+    public void removerAnexo(ClienteAnexo anexo) {
+        anexos.remove(anexo);
+    }
 
 }

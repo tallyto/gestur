@@ -1,3 +1,7 @@
+DELETE FROM anexo;
+
+DELETE FROM cliente_anexo;
+
 DELETE FROM item_venda;
 
 DELETE FROM venda;
@@ -7,6 +11,10 @@ DELETE FROM cliente;
 DELETE FROM produto;
 
 -- RESTART IDS
+
+ALTER SEQUENCE anexo_id_seq RESTART WITH 1;
+
+ALTER SEQUENCE cliente_anexo_id_seq RESTART WITH 1;
 
 ALTER SEQUENCE item_venda_id_seq RESTART WITH 1;
 
