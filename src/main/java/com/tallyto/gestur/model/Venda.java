@@ -31,5 +31,17 @@ public class Venda {
     @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL)
     private List<ItemVenda> itens = new ArrayList<>();
 
+    @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AnexoVenda> anexos = new ArrayList<>();
+
+    public void adicionarAnexo(AnexoVenda anexo) {
+        anexo.setVenda(this);
+        anexos.add(anexo);
+    }
+
+    public void removerAnexo(AnexoVenda anexo) {
+        anexos.remove(anexo);
+    }
+
 
 }

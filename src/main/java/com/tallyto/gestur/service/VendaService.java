@@ -19,19 +19,19 @@ public class VendaService {
         this.vendaRepository = vendaRepository;
     }
 
-    public Venda cadastrarVenda(Venda venda) {
+    public Venda cadastrar(Venda venda) {
         return vendaRepository.save(venda);
     }
 
-    public List<Venda> listarVendas() {
+    public List<Venda> listar() {
         return vendaRepository.findAll();
     }
 
-    public Venda obterPedidoPorId(Long id) {
+    public Venda buscarPorId(Long id) {
         return vendaRepository.findById(id).orElse(null);
     }
 
-    public Venda atualizarVenda(Long id, Venda venda) {
+    public Venda atualizar(Long id, Venda venda) {
         var vendaAtual = vendaRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("Venda não encontrada")
         );
@@ -42,7 +42,7 @@ public class VendaService {
 
     }
 
-    public void excluirVenda(Long id) {
+    public void excluir(Long id) {
         vendaRepository.deleteById(id);
     }
 }

@@ -28,13 +28,13 @@ public class VendaController {
 
     @PostMapping
     public ResponseEntity<Venda> cadastrar(@RequestBody Venda venda) {
-        Venda novoVenda = vendaService.cadastrarVenda(venda);
+        Venda novoVenda = vendaService.cadastrar(venda);
         return ResponseEntity.status(HttpStatus.CREATED).body(novoVenda);
     }
 
     @PostMapping("/{vendaId}/item")
     public ResponseEntity<ItemVenda> adicionarItemPedido(@PathVariable Long vendaId, @RequestBody ItemVenda itemVendaRequest) {
-        Venda venda = vendaService.obterPedidoPorId(vendaId);
+        Venda venda = vendaService.buscarPorId(vendaId);
         if (venda == null) {
             return ResponseEntity.notFound().build();
         }
@@ -58,25 +58,25 @@ public class VendaController {
 
     @GetMapping
     public ResponseEntity<List<Venda>> listar() {
-        List<Venda> vendas = vendaService.listarVendas();
+        List<Venda> vendas = vendaService.listar();
         return ResponseEntity.ok(vendas);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Venda> buscarPorId(@PathVariable Long id) {
-        Venda venda = vendaService.obterPedidoPorId(id);
+        Venda venda = vendaService.buscarPorId(id);
         return venda != null ? ResponseEntity.ok(venda) : ResponseEntity.notFound().build();
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Venda> atualizar(@PathVariable Long id, @RequestBody Venda venda) {
-        Venda vendaAtualizado = vendaService.atualizarVenda(id, venda);
+        Venda vendaAtualizado = vendaService.atualizar(id, venda);
         return ResponseEntity.ok(vendaAtualizado);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluir(@PathVariable Long id) {
-        vendaService.excluirVenda(id);
+        vendaService.excluir(id);
         return ResponseEntity.noContent().build();
     }
 }

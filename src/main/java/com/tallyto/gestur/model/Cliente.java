@@ -14,7 +14,6 @@ import java.util.List;
 @Getter
 @Setter
 public class Cliente {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -38,15 +37,15 @@ public class Cliente {
     private String cidade;
     private String estado;
 
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
-    private List<ClienteAnexo> anexos = new ArrayList<>();
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AnexoCliente> anexos = new ArrayList<>();
 
-    public void adicionarAnexo(ClienteAnexo anexo) {
+    public void adicionarAnexo(AnexoCliente anexo) {
         anexos.add(anexo);
         anexo.setCliente(this);
     }
 
-    public void removerAnexo(ClienteAnexo anexo) {
+    public void removerAnexo(AnexoCliente anexo) {
         anexos.remove(anexo);
     }
 

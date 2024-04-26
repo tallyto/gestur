@@ -1,6 +1,8 @@
-DELETE FROM anexo;
+DELETE FROM anexo_cliente;
 
-DELETE FROM cliente_anexo;
+DELETE FROM anexo_venda;
+
+DELETE FROM anexo;
 
 DELETE FROM item_venda;
 
@@ -14,7 +16,9 @@ DELETE FROM produto;
 
 ALTER SEQUENCE anexo_id_seq RESTART WITH 1;
 
-ALTER SEQUENCE cliente_anexo_id_seq RESTART WITH 1;
+ALTER SEQUENCE anexo_cliente_id_seq RESTART WITH 1;
+
+ALTER SEQUENCE anexo_venda_id_seq RESTART WITH 1;
 
 ALTER SEQUENCE item_venda_id_seq RESTART WITH 1;
 

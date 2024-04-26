@@ -1,9 +1,10 @@
 package com.tallyto.gestur.service;
 
 import com.tallyto.gestur.model.Anexo;
-import com.tallyto.gestur.model.AnexoCliente;
+import com.tallyto.gestur.model.AnexoVenda;
+import com.tallyto.gestur.model.Venda;
 import com.tallyto.gestur.repository.AnexoRepository;
-import com.tallyto.gestur.repository.AnexoClienteRepository;
+import com.tallyto.gestur.repository.AnexoVendaRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,10 +12,7 @@ import org.springframework.stereotype.Service;
 import java.io.InputStream;
 
 @Service
-public class AnexoClienteService {
-
-    @Autowired
-    ClienteService clienteService;
+public class AnexoVendaService {
 
     @Autowired
     AnexoRepository anexoRepository;
@@ -23,16 +21,19 @@ public class AnexoClienteService {
     AnexoStorageService anexoStorageService;
 
     @Autowired
-    AnexoClienteRepository anexoClienteRepository;
+    VendaService vendaService;
 
-    public Anexo recuperar(Long clienteId, Long anexoId) {
-        return anexoClienteRepository.findAnexoClienteByClienteIdAndAnexoId(clienteId, anexoId).getAnexo();
+    @Autowired
+    AnexoVendaRepository anexoVendaRepository;
+
+    public Anexo recuperar(Long vendaId, Long anexoId) {
+        return anexoVendaRepository.findAnexoVendaByVendaIdAndAnexoId(vendaId, anexoId).getAnexo();
     }
 
     @Transactional
-    public Anexo salvar(Long clienteId, Anexo anexo, InputStream dadosAnexo) {
+    public Anexo salvar(Long vendaId, Anexo anexo, InputStream dadosAnexo) {
 
-        var cliente = clienteService.buscarClientePorId(clienteId);
+        Venda venda = vendaService.buscarPorId(vendaId);
 
         String nomeAnexo = anexoStorageService.gerarNomeArquivo(anexo.getNomeArquivo());
 
@@ -40,11 +41,11 @@ public class AnexoClienteService {
 
         var anexoSalvo = anexoRepository.save(anexo);
 
-        var anexoCliente = new AnexoCliente();
+        var anexoVenda = new AnexoVenda();
 
-        anexoCliente.setAnexo(anexo);
+        anexoVenda.setAnexo(anexo);
 
-        cliente.adicionarAnexo(anexoCliente);
+        venda.adicionarAnexo(anexoVenda);
 
         var uploadAnexo = AnexoStorageService.NovoAnexo
                 .builder()
@@ -61,13 +62,12 @@ public class AnexoClienteService {
     @Transactional
     public void remover(Long clienteId, Long anexoId) {
 
-        var cliente = clienteService.buscarClientePorId(clienteId);
+        Venda venda = vendaService.buscarPorId(clienteId);
 
-        var clienteAnexo = anexoClienteRepository.findAnexoClienteByClienteIdAndAnexoId(clienteId, anexoId);
-
-        cliente.removerAnexo(clienteAnexo);
+        var clienteAnexo = anexoVendaRepository.findAnexoVendaByVendaIdAndAnexoId(clienteId, anexoId);
 
         anexoStorageService.remover(clienteAnexo.getAnexo().getNomeArquivo());
 
+        venda.removerAnexo(clienteAnexo);
     }
 }

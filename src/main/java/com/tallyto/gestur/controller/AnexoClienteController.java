@@ -14,7 +14,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("api/cliente/{clienteId}/anexo")
-public class AnexoController {
+public class AnexoClienteController {
 
     @Autowired
     public AnexoClienteService anexoClienteService;
@@ -22,11 +22,11 @@ public class AnexoController {
     @Autowired
     AnexoStorageService anexoStorageService;
 
-    @GetMapping("{id}")
-    public ResponseEntity<?> recuperar(@PathVariable Long id) {
+    @GetMapping("{anexoId}")
+    public ResponseEntity<?> recuperar(@PathVariable Long clienteId, @PathVariable Long anexoId) {
 
         try {
-            var anexo = anexoClienteService.recuperar(id);
+            var anexo = anexoClienteService.recuperar(clienteId, anexoId);
 
             if (anexo == null) {
                 return ResponseEntity.notFound().build();

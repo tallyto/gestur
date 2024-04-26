@@ -8,9 +8,9 @@ import java.util.UUID;
 
 public interface AnexoStorageService {
 
-    FotoRecuperada recuperar(String nomeArquivo);
+    AnexoRecuperado recuperar(String nomeArquivo);
 
-    void armazenar(NovaFoto novaFoto);
+    void armazenar(NovoAnexo novoAnexo);
 
     void remover(String nomeArquivo);
 
@@ -18,8 +18,8 @@ public interface AnexoStorageService {
         return String.format("%s_%s", UUID.randomUUID(), nomeOriginal);
     }
 
-    default void substituir(String nomeArquivoAntigo, NovaFoto novaFoto) {
-        this.armazenar(novaFoto);
+    default void substituir(String nomeArquivoAntigo, NovoAnexo novoAnexo) {
+        this.armazenar(novoAnexo);
         if (nomeArquivoAntigo != null) {
             remover(nomeArquivoAntigo);
         }
@@ -28,7 +28,7 @@ public interface AnexoStorageService {
 
     @Builder
     @Getter
-    class NovaFoto {
+    class NovoAnexo {
         private String nomeArquivo;
         private InputStream inputStream;
         private String tipo;
@@ -36,7 +36,7 @@ public interface AnexoStorageService {
 
     @Builder
     @Getter
-    class FotoRecuperada {
+    class AnexoRecuperado {
         private InputStream inputStream;
         private String url;
 
