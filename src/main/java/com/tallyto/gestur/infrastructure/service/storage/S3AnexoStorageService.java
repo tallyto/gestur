@@ -18,26 +18,26 @@ public class S3AnexoStorageService implements AnexoStorageService {
     @Autowired
     private StorageProperties storageProperties;
     @Override
-    public FotoRecuperada recuperar(String nomeArquivo) {
+    public AnexoRecuperado recuperar(String nomeArquivo) {
         String caminhoArquivo = getCaminhoArquivo(nomeArquivo);
 
         URL url = amazonS3.getUrl(storageProperties.getS3().getBucket(), caminhoArquivo);
 
-        return FotoRecuperada.builder().url(url.toString()).build();
+        return AnexoRecuperado.builder().url(url.toString()).build();
     }
 
     @Override
-    public void armazenar(NovaFoto novaFoto) {
+    public void armazenar(NovoAnexo novoAnexo) {
         try {
-            String caminhoArquivo = getCaminhoArquivo(novaFoto.getNomeArquivo());
+            String caminhoArquivo = getCaminhoArquivo(novoAnexo.getNomeArquivo());
 
             var objectMetadata = new ObjectMetadata();
-            objectMetadata.setContentType(novaFoto.getTipo());
+            objectMetadata.setContentType(novoAnexo.getTipo());
 
             var putObjectRequest = new PutObjectRequest(
                     storageProperties.getS3().getBucket(),
                     caminhoArquivo,
-                    novaFoto.getInputStream(),
+                    novoAnexo.getInputStream(),
                     objectMetadata
             ).withCannedAcl(CannedAccessControlList.PublicRead);
 

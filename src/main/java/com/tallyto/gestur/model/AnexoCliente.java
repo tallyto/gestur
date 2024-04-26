@@ -7,10 +7,10 @@ import lombok.Setter;
 
 
 @Entity
-@Table(name = "cliente_anexo")
+@Table(name = "anexo_cliente")
 @Getter
 @Setter
-public class ClienteAnexo {
+public class AnexoCliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,7 +20,7 @@ public class ClienteAnexo {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "anexo_id")
     private Anexo anexo;
 

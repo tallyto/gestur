@@ -6,13 +6,13 @@ CREATE TABLE anexo (
     tamanho INTEGER
 );
 
-CREATE TABLE cliente_anexo (
+CREATE TABLE anexo_cliente (
     id SERIAL PRIMARY KEY,
     cliente_id INTEGER REFERENCES cliente(id),
     anexo_id INTEGER REFERENCES anexo(id)
 );
 
-CREATE TABLE venda_anexo (
+CREATE TABLE anexo_venda (
     id SERIAL PRIMARY KEY,
     venda_id INTEGER REFERENCES venda(id),
     anexo_id INTEGER REFERENCES anexo(id)
