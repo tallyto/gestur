@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Entity
 @Getter
 @Setter
@@ -14,8 +16,12 @@ public class Produto {
 
     private String nome;
     private String descricao;
-    private double preco;
+    private BigDecimal preco;
+    @Column(name = "preco_total")
+    private BigDecimal precoTotal;
 
-
+    @ManyToOne
+    @JoinColumn(name = "fornecedor_id")
+    private Fornecedor fornecedor;
 
 }
