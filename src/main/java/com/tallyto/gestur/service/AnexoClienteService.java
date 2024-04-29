@@ -34,7 +34,7 @@ public class AnexoClienteService {
 
         var cliente = clienteService.buscarClientePorId(clienteId);
 
-        String nomeAnexo = anexoStorageService.gerarNomeArquivo(anexo.getNomeArquivo());
+        String nomeAnexo = anexoStorageService.gerarNomeArquivo(anexo.getNomeOriginal());
 
         anexo.setNomeArquivo(nomeAnexo);
 
@@ -61,11 +61,9 @@ public class AnexoClienteService {
     @Transactional
     public void remover(Long clienteId, Long anexoId) {
 
-        var cliente = clienteService.buscarClientePorId(clienteId);
-
         var clienteAnexo = anexoClienteRepository.findAnexoClienteByClienteIdAndAnexoId(clienteId, anexoId);
 
-        cliente.removerAnexo(clienteAnexo);
+        anexoClienteRepository.delete(clienteAnexo);
 
         anexoStorageService.remover(clienteAnexo.getAnexo().getNomeArquivo());
 

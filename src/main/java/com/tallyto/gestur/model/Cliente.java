@@ -37,7 +37,7 @@ public class Cliente {
     private String cidade;
     private String estado;
 
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<AnexoCliente> anexos = new ArrayList<>();
 
     public void adicionarAnexo(AnexoCliente anexo) {

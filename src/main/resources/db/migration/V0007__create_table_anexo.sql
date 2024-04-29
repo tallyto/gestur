@@ -1,6 +1,7 @@
 CREATE TABLE anexo (
     id SERIAL PRIMARY KEY,
     nome_arquivo VARCHAR(100),
+    nome_original VARCHAR(100),
     descricao VARCHAR(255),
     tipo VARCHAR(100),
     tamanho INTEGER
