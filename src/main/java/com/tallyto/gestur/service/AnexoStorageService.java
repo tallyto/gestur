@@ -37,15 +37,11 @@ public interface AnexoStorageService {
     @Builder
     @Getter
     class AnexoRecuperado {
-        private InputStream inputStream;
         private String url;
 
         public boolean temUrl() {
             return url != null;
         }
 
-        public boolean temInputStrem() {
-            return inputStream != null;
-        }
     }
 }

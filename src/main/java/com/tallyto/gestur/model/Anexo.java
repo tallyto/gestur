@@ -16,6 +16,9 @@ public class Anexo {
     @Column(name = "nome_arquivo")
     private String nomeArquivo;
 
+    @Column(name = "nome_original")
+    private String nomeOriginal;
+
     private String descricao;
 
     private String tipo;
