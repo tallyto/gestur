@@ -35,7 +35,7 @@ public class AnexoVendaService {
 
         Venda venda = vendaService.buscarPorId(vendaId);
 
-        String nomeAnexo = anexoStorageService.gerarNomeArquivo(anexo.getNomeArquivo());
+        String nomeAnexo = anexoStorageService.gerarNomeArquivo(anexo.getNomeOriginal());
 
         anexo.setNomeArquivo(nomeAnexo);
 
@@ -62,12 +62,10 @@ public class AnexoVendaService {
     @Transactional
     public void remover(Long clienteId, Long anexoId) {
 
-        Venda venda = vendaService.buscarPorId(clienteId);
-
         var clienteAnexo = anexoVendaRepository.findAnexoVendaByVendaIdAndAnexoId(clienteId, anexoId);
 
         anexoStorageService.remover(clienteAnexo.getAnexo().getNomeArquivo());
 
-        venda.removerAnexo(clienteAnexo);
+        anexoVendaRepository.delete(clienteAnexo);
     }
 }

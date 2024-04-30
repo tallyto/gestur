@@ -16,6 +16,12 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
+    @GetMapping
+    public ResponseEntity<List<Cliente>> listarClientes() {
+        List<Cliente> clientes = clienteService.listarClientes();
+        return ResponseEntity.ok(clientes);
+    }
+
     @PostMapping
     public ResponseEntity<Cliente> cadastrarCliente(@RequestBody Cliente cliente) {
         Cliente novoCliente = clienteService.cadastrarCliente(cliente);
@@ -40,10 +46,6 @@ public class ClienteController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping
-    public ResponseEntity<List<Cliente>> listarClientes() {
-        List<Cliente> clientes = clienteService.listarClientes();
-        return ResponseEntity.ok(clientes);
-    }
+
 }
 
