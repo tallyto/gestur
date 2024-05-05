@@ -1,10 +1,12 @@
-# fly.toml app configuration file generated for gestur on 2024-04-27T19:46:38-03:00
+# fly.toml app configuration file generated for gestur on 2024-05-05T00:16:40-03:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
 app = 'gestur'
 primary_region = 'gru'
+
+[build]
 
 [http_service]
   internal_port = 8080

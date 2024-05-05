@@ -34,6 +34,10 @@ public class Venda {
     @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL)
     private List<AnexoVenda> anexos = new ArrayList<>();
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "servico")
+    private Servico servico;
+
     public void adicionarAnexo(AnexoVenda anexo) {
         anexo.setVenda(this);
         anexos.add(anexo);

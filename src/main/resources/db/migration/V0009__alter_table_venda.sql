@@ -1,0 +1,2 @@
+ALTER TABLE venda
+    ADD COLUMN servico VARCHAR(50);
