@@ -26,7 +26,9 @@ public class Venda {
     @Column(name = "data_desembarque")
     private LocalDate dataDesembarque;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private Status status;
 
     @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL)
     private List<ItemVenda> itens = new ArrayList<>();

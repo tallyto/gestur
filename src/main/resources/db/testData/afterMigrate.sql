@@ -49,11 +49,12 @@ VALUES
 
 INSERT INTO venda (cliente_id, data_embarque, data_desembarque, status)
 VALUES
-    (1, '2024-06-15', '2024-06-22', 'Confirmada'),
-    (2, '2024-07-10', '2024-07-15', 'Confirmada'),
-    (3, '2024-08-05', '2024-08-12', 'Pendente'),
-    (4, '2024-09-20', '2024-09-25', 'Confirmada'),
-    (5, '2024-10-15', '2024-10-22', 'Pendente');
+    (1, '2024-06-15', '2024-06-22', 'EM_ANDAMENTO'),
+    (2, '2024-07-10', '2024-07-15', 'EM_ANDAMENTO'),
+    (3, '2024-08-05', '2024-08-12', 'PENDENTE'),
+    (4, '2024-09-20', '2024-09-25', 'EM_ANDAMENTO'),
+    (5, '2024-10-15', '2024-10-22', 'PENDENTE');
+
 
 
 INSERT INTO item_venda (venda_id, produto_id, quantidade, forma_pagamento, status_pagamento, valor_total, valor_pago)
