@@ -37,6 +37,18 @@ public class Cliente {
     private String cidade;
     private String estado;
 
+    @Column(name = "numero_passaporte")
+    private String numeroPassaporte;
+
+    @Column(name = "pais_emissao")
+    private String paisEmissao;
+
+    @Column(name = "data_emissao")
+    private LocalDate dataEmissao;
+
+    @Column(name = "data_validade")
+    private LocalDate dataValidade;
+
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<AnexoCliente> anexos = new ArrayList<>();
 
