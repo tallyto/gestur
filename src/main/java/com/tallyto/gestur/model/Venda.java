@@ -26,6 +26,9 @@ public class Venda {
     @Column(name = "data_desembarque")
     private LocalDate dataDesembarque;
 
+    private String origem;
+    private String destino;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private Status status;
@@ -43,10 +46,6 @@ public class Venda {
     public void adicionarAnexo(AnexoVenda anexo) {
         anexo.setVenda(this);
         anexos.add(anexo);
-    }
-
-    public void removerAnexo(AnexoVenda anexo) {
-        anexos.remove(anexo);
     }
 
 

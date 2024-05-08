@@ -1,0 +1,3 @@
+ALTER TABLE venda
+    ADD COLUMN origem VARCHAR(100),
+    ADD COLUMN destino VARCHAR(100);
