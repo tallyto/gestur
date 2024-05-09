@@ -22,19 +22,25 @@ public class ItemVenda {
     @JoinColumn(name = "venda_id")
     private Venda venda;
 
-    @ManyToOne
-    @JoinColumn(name = "produto_id")
-    private Produto produto;
-
-    private int quantidade;
+    @Column(name = "forma_pagamento")
+    private String formaPagamento;
 
     @Column(name = "valor_total")
     private BigDecimal valorTotal;
 
-    @Column(name = "valor_pago")
-    private BigDecimal valorPago;
+    private String descricao;
 
-    @Column(name = "forma_pagamento")
-    private String formaPagamento;
+    @ManyToOne
+    @JoinColumn(name = "fornecedor_id")
+    private Fornecedor fornecedor;
+
+    private String anotacao;
+
+    @Column(name = "comissao_recebida")
+    private BigDecimal comissaoRecebida;
+
+    @Column(name = "comissao_a_receber")
+    private BigDecimal comissaoAReceber;
+
 
 }
