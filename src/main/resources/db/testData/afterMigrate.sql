@@ -12,8 +12,6 @@ DELETE FROM venda;
 
 DELETE FROM cliente;
 
-DELETE FROM produto;
-
 -- RESTART IDS
 
 ALTER SEQUENCE fornecedor_id_seq RESTART WITH 1;
@@ -30,8 +28,6 @@ ALTER SEQUENCE venda_id_seq RESTART WITH 1;
 
 ALTER SEQUENCE cliente_id_seq RESTART WITH 1;
 
-ALTER SEQUENCE produto_id_seq RESTART WITH 1;
-
 -- END RESTART IDS
 
 INSERT INTO cliente (nome, cpf, rg, email, telefone, cep, rua, numero, complemento, bairro, cidade, estado, renda,
@@ -47,13 +43,6 @@ VALUES ('João Silva', '123.456.789-00', '1234567-8', 'joao@example.com', '(11) 
        ('Lucas Pereira', '999.888.777-66', '9998887-6', 'lucas@example.com', '(55) 9999-8888', '77777-666', 'Rua E',
         '1213', 'Apto 301', 'Centro', 'Cidade E', 'EE', 5500.00, 'Empresário', '1980-08-25');
 
-
-INSERT INTO produto (nome, descricao, preco)
-VALUES ('Pacote de Viagem para Cancún', 'Inclui hospedagem em resort all-inclusive por uma semana', 1999.99),
-       ('Passeio de Barco pelo Rio Sena', 'Passeio de barco de 2 horas com guia turístico', 49.99),
-       ('Excursão ao Machu Picchu', 'Inclui transporte, guia turístico e entrada no parque', 599.99),
-       ('Pacote de Cruzeiro pelo Mediterrâneo', 'Cruzeiro de 7 dias com pensão completa', 1499.99),
-       ('Excursão de Safari na África do Sul', 'Safari de 3 dias em reserva natural com guia especializado', 999.99);
 
 -- Inserir vendas
 INSERT INTO venda (cliente_id, data_embarque, data_desembarque, origem, destino, status)
