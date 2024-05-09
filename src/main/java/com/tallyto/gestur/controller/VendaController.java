@@ -2,10 +2,8 @@ package com.tallyto.gestur.controller;
 
 import com.tallyto.gestur.model.ItemVenda;
 import com.tallyto.gestur.model.Venda;
-import com.tallyto.gestur.model.Produto;
 import com.tallyto.gestur.repository.ItemVendaRepository;
 import com.tallyto.gestur.service.VendaService;
-import com.tallyto.gestur.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +19,6 @@ public class VendaController {
     private VendaService vendaService;
 
     @Autowired
-    private ProdutoService produtoService;
-
-    @Autowired
     private ItemVendaRepository itemVendaRepository;
 
     @PostMapping
@@ -33,24 +28,15 @@ public class VendaController {
     }
 
     @PostMapping("/{vendaId}/item")
-    public ResponseEntity<ItemVenda> adicionarItemPedido(@PathVariable Long vendaId, @RequestBody ItemVenda itemVendaRequest) {
+    public ResponseEntity<ItemVenda> adicionarItemPedido(@PathVariable Long vendaId, @RequestBody ItemVenda itemVenda) {
         Venda venda = vendaService.buscarPorId(vendaId);
+
         if (venda == null) {
             return ResponseEntity.notFound().build();
         }
 
-        Produto produto = produtoService.buscarProduto(itemVendaRequest.getProduto().getId());
-
-        if (produto == null) {
-            return ResponseEntity.badRequest().build();
-        }
-
-        ItemVenda itemVenda = new ItemVenda();
         itemVenda.setVenda(venda);
-        itemVenda.setProduto(produto);
-        itemVenda.setQuantidade(itemVendaRequest.getQuantidade());
 
-        // Aqui você pode chamar o serviço para salvar o itemPedido no banco de dados
         itemVenda = itemVendaRepository.save(itemVenda);
 
         return ResponseEntity.ok(itemVenda);

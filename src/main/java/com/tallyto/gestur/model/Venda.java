@@ -33,7 +33,7 @@ public class Venda {
     @Column(name = "status")
     private Status status;
 
-    @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "venda")
     private List<ItemVenda> itens = new ArrayList<>();
 
     @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL)
