@@ -42,5 +42,22 @@ public class ItemVenda {
     @Column(name = "comissao_a_receber")
     private BigDecimal comissaoAReceber;
 
+    private String localizador;
+
+    private String atendente;
+
+    private Integer quantidade;
+
+    private BigDecimal desconto;
+
+    @Column(name = "valor_fornecedor")
+    private BigDecimal valorFornecedor;
+
+    @Column(name = "desconto_fornecedor")
+    private BigDecimal descontoFornecedor;
+
+    @Column(name = "quantidade_fornecedor")
+    private BigDecimal quantidadeFornecedor;
+
 
 }
