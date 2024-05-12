@@ -1,4 +1,4 @@
-package com.tallyto.gestur.infrastructure.service.storage;
+package com.tallyto.gestur.infra.service.storage;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;

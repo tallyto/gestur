@@ -1,18 +1,29 @@
-DELETE FROM item_venda;
+DELETE
+FROM users;
 
-DELETE FROM fornecedor;
+DELETE
+FROM item_venda;
 
-DELETE FROM anexo_cliente;
+DELETE
+FROM fornecedor;
 
-DELETE FROM anexo_venda;
+DELETE
+FROM anexo_cliente;
 
-DELETE FROM anexo;
+DELETE
+FROM anexo_venda;
 
-DELETE FROM venda;
+DELETE
+FROM anexo;
 
-DELETE FROM cliente;
+DELETE
+FROM venda;
+
+DELETE
+FROM cliente;
 
 -- RESTART IDS
+ALTER SEQUENCE users_id_seq RESTART WITH 1;
 
 ALTER SEQUENCE fornecedor_id_seq RESTART WITH 1;
 
@@ -46,12 +57,11 @@ VALUES ('João Silva', '123.456.789-00', '1234567-8', 'joao@example.com', '(11) 
 
 -- Inserir vendas
 INSERT INTO venda (cliente_id, data_embarque, data_desembarque, origem, destino, status)
-VALUES
-    (1, '2024-06-15', '2024-06-22', 'São Paulo', 'Paris', 'EM_ANDAMENTO'),
-    (2, '2024-07-10', '2024-07-15', 'Nova York', 'Los Angeles', 'EM_ANDAMENTO'),
-    (3, '2024-08-05', '2024-08-12', 'Cancún', 'Riviera Maya', 'PENDENTE'),
-    (4, '2024-09-20', '2024-09-25', 'Roma', 'Veneza', 'EM_ANDAMENTO'),
-    (5, '2024-10-15', '2024-10-22', 'Tóquio', 'Kyoto', 'PENDENTE');
+VALUES (1, '2024-06-15', '2024-06-22', 'São Paulo', 'Paris', 'EM_ANDAMENTO'),
+       (2, '2024-07-10', '2024-07-15', 'Nova York', 'Los Angeles', 'EM_ANDAMENTO'),
+       (3, '2024-08-05', '2024-08-12', 'Cancún', 'Riviera Maya', 'PENDENTE'),
+       (4, '2024-09-20', '2024-09-25', 'Roma', 'Veneza', 'EM_ANDAMENTO'),
+       (5, '2024-10-15', '2024-10-22', 'Tóquio', 'Kyoto', 'PENDENTE');
 
 
 -- Inserir fornecedores
@@ -103,3 +113,5 @@ VALUES (5, 'Boleto bancário', 2000.00, 'Hospedagem em ryokan tradicional - 10 n
         25.00),
        (5, 'Boleto bancário', 700.00, 'Aula de culinária japonesa com chef local', 3, 'Anotação 15', 50.00, 25.00);
 
+INSERT INTO users(id, email, password, role)
+values (1, 'tallyto@gmail.com', '$2a$10$KxdhGU/2AvXVBdfgfxnXN.g7e6pBzL55xGoJKi6fg5FUNNmOWkJ/e', 'USER')
