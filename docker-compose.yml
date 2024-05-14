@@ -10,3 +10,13 @@ services:
       POSTGRES_DB: gestur_db
       POSTGRES_USER: gestur_user
       POSTGRES_PASSWORD: gestur_password
+
+#  gestur:
+#    image: gestur:latest
+#    container_name: gestur-app
+#    environment:
+#      - DB_URL=jdbc:postgresql://postgres:5432/gestur_db
+#      - DB_USERNAME=gestur_user
+#      - DB_PASSWORD=gestur_password
+#    ports:
+#      - "8080:8080"
