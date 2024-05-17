@@ -25,30 +25,31 @@ public class ItemVenda {
     @Column(name = "forma_pagamento")
     private String formaPagamento;
 
+    private String localizador;
+
+    private String atendente;
+
+    private String descricao;
+
+    private String anotacao;
+
+    private Integer quantidade;
+
     @Column(name = "valor_total")
     private BigDecimal valorTotal;
 
-    private String descricao;
+    private BigDecimal desconto;
+
+    @Column(name = "comissao_recebida")
+    private BigDecimal comissaoRecebida;
+
 
     @ManyToOne
     @JoinColumn(name = "fornecedor_id")
     private Fornecedor fornecedor;
 
-    private String anotacao;
-
-    @Column(name = "comissao_recebida")
-    private BigDecimal comissaoRecebida;
-
-    @Column(name = "comissao_a_receber")
-    private BigDecimal comissaoAReceber;
-
-    private String localizador;
-
-    private String atendente;
-
-    private Integer quantidade;
-
-    private BigDecimal desconto;
+    @Column(name = "quantidade_fornecedor")
+    private BigDecimal quantidadeFornecedor;
 
     @Column(name = "valor_fornecedor")
     private BigDecimal valorFornecedor;
@@ -56,8 +57,8 @@ public class ItemVenda {
     @Column(name = "desconto_fornecedor")
     private BigDecimal descontoFornecedor;
 
-    @Column(name = "quantidade_fornecedor")
-    private BigDecimal quantidadeFornecedor;
+    @Column(name = "comissao_a_receber")
+    private BigDecimal comissaoAReceber;
 
 
 }
