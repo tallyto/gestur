@@ -1,6 +1,7 @@
 package com.tallyto.gestur.database;
 
 import org.flywaydb.core.Flyway;
+import org.flywaydb.core.api.MigrationInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +21,14 @@ public class FlywayMigrationService {
                 .dataSource(dataSource)
                 .schemas(schemaName)
                 .load();
-        flyway.migrate();
+
+        // Obter informações sobre as migrações
+        MigrationInfoService info = flyway.info();
+
+        // Verificar se há migrações pendentes
+        if (info.pending().length > 0) {
+            // Realizar a migração somente se houver migrações pendentes
+            flyway.migrate();
+        }
     }
 }

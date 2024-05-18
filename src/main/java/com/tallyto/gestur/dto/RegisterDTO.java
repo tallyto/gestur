@@ -1,6 +1,6 @@
 package com.tallyto.gestur.dto;
 
-import com.tallyto.gestur.model.UserRole;
+import com.tallyto.gestur.enums.UserRole;
 import jakarta.validation.constraints.*;
 
 public record RegisterDTO(

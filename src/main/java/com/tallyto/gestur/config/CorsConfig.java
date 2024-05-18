@@ -1,17 +1,21 @@
 package com.tallyto.gestur.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class CorsConfig implements WebMvcConfigurer {
+    @Value("${cors.originPatterns}")
+    private String corsOriginPatterns;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
+        var allowedOrigins = corsOriginPatterns.split(",");
         registry.addMapping("/**")
-                .allowedOrigins("*") // Permitir solicitações de qualquer origem
-                .allowedMethods("*") // Métodos permitidos
-                .allowedHeaders("*"); // Headers permitidos
+                .allowedMethods("*")
+                .allowedOrigins(allowedOrigins)
+                .allowCredentials(true);
     }
 }

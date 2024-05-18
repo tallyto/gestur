@@ -1,5 +1,7 @@
 package com.tallyto.gestur.model;
 
+import com.tallyto.gestur.enums.Servico;
+import com.tallyto.gestur.enums.Status;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
