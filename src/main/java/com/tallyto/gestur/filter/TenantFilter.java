@@ -20,7 +20,7 @@ public class TenantFilter implements Filter {
     private static final ThreadLocal<String> currentTenant = new InheritableThreadLocal<>();
 
     @Autowired
-    private FlywayMigrationService  flywayMigrationService;
+    private FlywayMigrationService flywayMigrationService;
 
     public static String getCurrentTenant() {
         String tenant = currentTenant.get();

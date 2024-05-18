@@ -1,4 +1,4 @@
-package com.tallyto.gestur.model;
+package com.tallyto.gestur.enums;
 
 public enum Status {
     COTACAO,

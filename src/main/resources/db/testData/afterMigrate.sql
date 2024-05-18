@@ -1,7 +1,4 @@
 DELETE
-FROM users;
-
-DELETE
 FROM item_venda;
 
 DELETE
@@ -23,8 +20,6 @@ DELETE
 FROM cliente;
 
 -- RESTART IDS
-ALTER SEQUENCE users_id_seq RESTART WITH 1;
-
 ALTER SEQUENCE fornecedor_id_seq RESTART WITH 1;
 
 ALTER SEQUENCE anexo_id_seq RESTART WITH 1;
@@ -112,6 +107,3 @@ VALUES (5, 'Boleto bancário', 2000.00, 'Hospedagem em ryokan tradicional - 10 n
        (5, 'Boleto bancário', 800.00, 'Passeio pelo Templo Senso-ji e Mercado de Nakamise', 2, 'Anotação 14', 50.00,
         25.00),
        (5, 'Boleto bancário', 700.00, 'Aula de culinária japonesa com chef local', 3, 'Anotação 15', 50.00, 25.00);
-
-INSERT INTO users(id, email, password, role)
-values (1, 'tallyto@gmail.com', '$2a$10$KxdhGU/2AvXVBdfgfxnXN.g7e6pBzL55xGoJKi6fg5FUNNmOWkJ/e', 'USER')
