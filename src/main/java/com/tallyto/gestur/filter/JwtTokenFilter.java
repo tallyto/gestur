@@ -29,7 +29,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         String token = request.getHeader("Authorization");
         token = jwtTokenService.formatToken(token);
 
-        if (token != null && jwtTokenService.validateToken(token)){
+        if (token != null && jwtTokenService.validateToken(token)) {
             DecodedJWT decodedJWT = jwtTokenService.decodedJWT(token);
             UserDetails user = userService.loadUserByUsername(decodedJWT.getSubject());
             Authentication authentication = new UsernamePasswordAuthenticationToken(user, "", user.getAuthorities());

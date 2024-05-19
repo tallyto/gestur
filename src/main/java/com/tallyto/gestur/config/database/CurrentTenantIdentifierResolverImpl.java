@@ -1,6 +1,6 @@
-package com.tallyto.gestur.config;
+package com.tallyto.gestur.config.database;
 
-import com.tallyto.gestur.filter.TenantFilter;
+import com.tallyto.gestur.context.TenantContext;
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.springframework.stereotype.Component;
 
@@ -10,8 +10,8 @@ import java.util.Objects;
 public class CurrentTenantIdentifierResolverImpl implements CurrentTenantIdentifierResolver<String> {
     @Override
     public String resolveCurrentTenantIdentifier() {
-        String tenant = TenantFilter.getCurrentTenant();
-        return Objects.requireNonNullElse(tenant, "public");
+        String tenant = TenantContext.getCurrentTenant();
+        return Objects.requireNonNullElse(tenant, TenantContext.DEFAULT_TENANT);
     }
 
     @Override

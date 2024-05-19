@@ -1,4 +1,4 @@
-package com.tallyto.gestur.config;
+package com.tallyto.gestur.config.database;
 
 import org.hibernate.cfg.MultiTenancySettings;
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
@@ -35,16 +35,18 @@ public class HibernateConfig {
             CurrentTenantIdentifierResolver<String> currentTenantIdentifierResolverImpl
     ) {
 
+        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+        em.setDataSource(dataSource);
+        em.setPackagesToScan("com.tallyto.gestur.*");
+        em.setJpaVendorAdapter(this.jpaVendorAdapter());
+
         Map<String, Object> jpaPropertiesMap = new HashMap<>(jpaProperties.getProperties());
         jpaPropertiesMap.put(MultiTenancySettings.MULTI_TENANT_CONNECTION_PROVIDER, multiTenantConnectionProviderImpl);
         jpaPropertiesMap.put(MultiTenancySettings.MULTI_TENANT_IDENTIFIER_RESOLVER, currentTenantIdentifierResolverImpl);
         jpaPropertiesMap.put("hibernate.show_sql", true);
 
-        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-        entityManagerFactoryBean.setDataSource(dataSource);
-        entityManagerFactoryBean.setPackagesToScan("com.tallyto.gestur.*");
-        entityManagerFactoryBean.setJpaVendorAdapter(this.jpaVendorAdapter());
-        entityManagerFactoryBean.setJpaPropertyMap(jpaPropertiesMap);
-        return entityManagerFactoryBean;
+        em.setJpaPropertyMap(jpaPropertiesMap);
+
+        return em;
     }
 }

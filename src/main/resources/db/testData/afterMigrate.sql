@@ -19,6 +19,8 @@ FROM venda;
 DELETE
 FROM cliente;
 
+DELETE FROM public.tenants;
+
 -- RESTART IDS
 ALTER SEQUENCE fornecedor_id_seq RESTART WITH 1;
 
@@ -33,6 +35,9 @@ ALTER SEQUENCE item_venda_id_seq RESTART WITH 1;
 ALTER SEQUENCE venda_id_seq RESTART WITH 1;
 
 ALTER SEQUENCE cliente_id_seq RESTART WITH 1;
+
+ALTER SEQUENCE public.tenants_id_seq RESTART WITH 1;
+
 
 -- END RESTART IDS
 
@@ -107,3 +112,9 @@ VALUES (5, 'Boleto bancário', 2000.00, 'Hospedagem em ryokan tradicional - 10 n
        (5, 'Boleto bancário', 800.00, 'Passeio pelo Templo Senso-ji e Mercado de Nakamise', 2, 'Anotação 14', 50.00,
         25.00),
        (5, 'Boleto bancário', 700.00, 'Aula de culinária japonesa com chef local', 3, 'Anotação 15', 50.00, 25.00);
+
+INSERT INTO public.tenants (domain, name, email, phone_number, address, created_at, updated_at)
+VALUES ('turemarcombr', 'Turemar & Co.', 'info@turemar.com.br', NULL, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+INSERT INTO public.tenants (domain, name, email, phone_number, address, created_at, updated_at)
+VALUES ('sgturcombr', 'Sistema de Gestão de Turismo', 'admin@sgtur.com.br', NULL, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);

@@ -1,4 +1,4 @@
-package com.tallyto.gestur.config;
+package com.tallyto.gestur.config.language;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;

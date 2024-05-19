@@ -1,4 +1,4 @@
-package com.tallyto.gestur.config;
+package com.tallyto.gestur.config.security;
 
 import com.tallyto.gestur.filter.JwtTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,16 +23,13 @@ public class WebSecurityConfig {
 
     @Bean
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
-
-        return http.csrf(AbstractHttpConfigurer::disable)
+        return http
+                .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(
                         auth -> {
                             auth.requestMatchers("/api/v1/auth/register").permitAll();
                             auth.requestMatchers("/api/v1/auth/login").permitAll();
-                            auth.requestMatchers("/v3/api-docs/**").permitAll();
-                            auth.requestMatchers("/swagger-ui/**").permitAll();
                             auth.anyRequest().authenticated();
                         })
                 .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)

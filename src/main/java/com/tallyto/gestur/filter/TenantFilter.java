@@ -1,51 +1,49 @@
 package com.tallyto.gestur.filter;
 
+import com.tallyto.gestur.context.TenantContext;
 import com.tallyto.gestur.database.FlywayMigrationService;
-import jakarta.servlet.*;
+import com.tallyto.gestur.repository.TenantRepository;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
-import org.slf4j.MDC;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Objects;
 
+import static com.tallyto.gestur.context.TenantContext.PRIVATE_TENANT_HEADER;
+
+@Order(Ordered.HIGHEST_PRECEDENCE)
 @Component
-public class TenantFilter implements Filter {
-
-    private static final String LOGGER_TENANT_ID = "tenant_id";
-    public static final String PRIVATE_TENANT_HEADER = "X-PrivateTenant";
-    private static final String DEFAULT_TENANT = "public";
-
-    private static final ThreadLocal<String> currentTenant = new InheritableThreadLocal<>();
+@Slf4j
+public class TenantFilter extends OncePerRequestFilter {
 
     @Autowired
     private FlywayMigrationService flywayMigrationService;
 
-    public static String getCurrentTenant() {
-        String tenant = currentTenant.get();
-        return Objects.requireNonNullElse(tenant, DEFAULT_TENANT);
-    }
-
-    public static void setCurrentTenant(String tenant) {
-        MDC.put(LOGGER_TENANT_ID, tenant);
-        currentTenant.set(tenant);
-    }
-
-    public static void clear() {
-        MDC.clear();
-        currentTenant.remove();
-    }
+    @Autowired
+    private TenantRepository tenantRepository;
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        HttpServletRequest req = (HttpServletRequest) request;
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        String privateTenant = request.getHeader(PRIVATE_TENANT_HEADER);
 
-        String privateTenant = req.getHeader(PRIVATE_TENANT_HEADER);
-        if (privateTenant != null) {
-            TenantFilter.setCurrentTenant(privateTenant);
+        if (privateTenant != null && !privateTenant.isEmpty()) {
+            var tenant = tenantRepository.getTenantByDomain(privateTenant);
+            if (tenant == null) {
+                log.error("Tenant not found for domain: " + privateTenant);
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Tenant not found");
+                return;
+            }
+            TenantContext.setCurrentTenant(privateTenant);
             flywayMigrationService.migrateTenantSchema(privateTenant);
         }
-        chain.doFilter(request, response);
+
+        filterChain.doFilter(request, response);
     }
 }

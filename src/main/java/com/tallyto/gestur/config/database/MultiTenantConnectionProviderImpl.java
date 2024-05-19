@@ -1,5 +1,6 @@
-package com.tallyto.gestur.config;
+package com.tallyto.gestur.config.database;
 
+import com.tallyto.gestur.context.TenantContext;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
 import org.springframework.stereotype.Component;
@@ -40,8 +41,7 @@ public class MultiTenantConnectionProviderImpl implements MultiTenantConnectionP
     @Override
     public void releaseConnection(String tenantIdentifier, Connection connection) throws SQLException {
         log.info("Release connection for tenant {}", tenantIdentifier);
-        String defaultTenant = "public";
-        connection.setSchema(defaultTenant);
+        connection.setSchema(TenantContext.DEFAULT_TENANT);
         releaseAnyConnection(connection);
     }
 
@@ -51,12 +51,11 @@ public class MultiTenantConnectionProviderImpl implements MultiTenantConnectionP
     }
 
     @Override
-    public boolean isUnwrappableAs(Class aClass) {
+    public boolean isUnwrappableAs(Class unwrapType) {
         return false;
     }
-
     @Override
-    public <T> T unwrap(Class<T> aClass) {
+    public <T> T unwrap(Class<T> unwrapType) {
         return null;
     }
 }
