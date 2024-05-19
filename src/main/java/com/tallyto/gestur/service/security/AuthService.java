@@ -58,7 +58,7 @@ public class AuthService {
 
         User user = userRepository.findByEmail(dto.email());
 
-        if(user == null)
+        if (user == null)
             throw new ResourceNotFoundException("Email/password incorrect or non-existent");
 
         return jwtTokenService.createAccessToken(user.getEmail(), user.getRoles());
